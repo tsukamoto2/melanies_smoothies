@@ -1,6 +1,5 @@
 # requirements.txt
 # Streamlitアプリに必要なライブラリを記述します
-streamlit
-snowflake-connector-python
 snowflake-snowpark-python
+streamlit
 requests
