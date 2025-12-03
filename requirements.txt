@@ -1,15 +1,6 @@
-import streamlit as st
-# ... 既存のインポート文 ...
-
-import requests # ← この行を追加
-
-# ... アプリのロジック ...
-
 # requirements.txt
-snowflake-snowpark-python 
-streamlit
-# requirements.txt の内容 (例)
+# Streamlitアプリに必要なライブラリを記述します
 streamlit
 snowflake-connector-python
-# ... 既存のライブラリに加えて、以下を追加
+snowflake-snowpark-python
 requests
