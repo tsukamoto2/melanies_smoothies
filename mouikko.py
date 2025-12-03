@@ -31,9 +31,9 @@ if ingredients_list:
     # 選択された各フルーツについて処理
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen +' '
-        
+        st.subheader(fruit_chosen + ' Nutrition Information')
         # 課題の指示通り、API呼び出しとDataFrame表示をforループ内に追加
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" +fruit_chosen)
         # API応答（JSON形式）をDataFrameとしてStreamlitに表示
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
