@@ -3,7 +3,7 @@ import streamlit as st
 from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
-import requests # requestsのインポート文をファイルの冒頭に移動
+import requests # requestsのインポート文
 
 # Write directly to the app
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw: ")
@@ -28,12 +28,16 @@ ingredients_list = st.multiselect(
 if ingredients_list:
     ingredients_string = ''
     
+    # 選択された各フルーツについて処理
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen +' '
-        # **API呼び出しをforループ内から削除しました** (冗長なため)
+        
+        # 課題の指示通り、API呼び出しとDataFrame表示をforループ内に追加
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        # API応答（JSON形式）をDataFrameとしてStreamlitに表示
+        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
-    
-    #st.write(ingredients_string)
+    # st.write(ingredients_string)
 
     my_insert_stmt = """insert into smoothies.public.orders (ingredients,name_on_order)
         values ('""" + ingredients_string +"""', '""" +name_on_order+ """')"""
@@ -49,6 +53,6 @@ if ingredients_list:
         st.success('Your Smoothie is ordered!', icon="✅")
 
 
-# API呼び出しと表示 (トップレベルに戻すことでインデントエラーを解消)
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+# トップレベルのAPI呼び出しは、課題の指示通りにforループ内に移動したため削除
+# smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+# sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
