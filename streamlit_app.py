@@ -1,6 +1,5 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import when_matched, col, when_not_matched 
 import pandas as pd
 
@@ -14,6 +13,9 @@ session = get_active_session()
 # ----------------------------------------------------
 # 注文データ取得とフィルタリング
 # ----------------------------------------------------
+
+cnx = st.connection("snowflake")
+session = cnx.session()
 
 orders_df = session.table("smoothies.public.orders")
 pending_orders_df = orders_df.filter(col('"ORDER_FILLED"') == False) 
