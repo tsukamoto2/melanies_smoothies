@@ -59,7 +59,3 @@ if orders_to_fill > 0:
 else:
     # 注文がない場合: メッセージを完全に表示
     st.success('There are no pending orders right now.', icon="👍")
-
-# New section to display smoothiefroot nutrition information
-import requests
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon") st.text(smoothiefroot_response)
