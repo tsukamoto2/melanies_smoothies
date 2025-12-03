@@ -8,14 +8,11 @@ st.title(":cup_with_straw: Pending Smoothie Orders :cup_with_straw: ")
 st.write(
     """Orders that need to be filled.
     """)
-
-session = get_active_session()
+cnx = st.connection("snowflake")
+session = cnx.session()
 # ----------------------------------------------------
 # 注文データ取得とフィルタリング
 # ----------------------------------------------------
-
-cnx = st.connection("snowflake")
-session = cnx.session()
 
 orders_df = session.table("smoothies.public.orders")
 pending_orders_df = orders_df.filter(col('"ORDER_FILLED"') == False) 
