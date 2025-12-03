@@ -1,3 +1,8 @@
 # requirements.txt
 snowflake-snowpark-python 
 streamlit
+# requirements.txt の内容 (例)
+streamlit
+snowflake-connector-python
+# ... 既存のライブラリに加えて、以下を追加
+requests
