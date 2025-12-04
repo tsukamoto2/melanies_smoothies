@@ -23,8 +23,14 @@ my_dataframe = session.table('"SMOOTHIES"."PUBLIC"."FRUIT_OPTIONS"').select(col(
 # Note: 'SEARCH_ON'列も大文字で指定。もし小文字で作成されている場合は 'search_on' に修正が必要です。
 
 # 選択肢の確認（アプリが正常に動作し始めたらコメントアウトを推奨）
-st.dataframe(data=my_dataframe, use_container_width=True)
-st.stop() # ここで一時停止しているため、データ取得（my_dataframe）に成功すれば、この画面で停止します。
+#st.dataframe(data=my_dataframe, use_container_width=True)
+#st.stop() # ここで一時停止しているため、データ取得（my_dataframe）に成功すれば、この画面で停止します。
+
+# Convert the Snowpark Dataframe to a Pandas Dataframe so we can use the LOC function
+pd_df=my_dataframe.to_pandas()
+st.dataframe(pd_df)
+st.stop()
+
 
 ingredients_list = st.multiselect(
     '材料を最大5つまで選択してください:'
