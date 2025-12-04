@@ -20,6 +20,10 @@ session = cnx.session()
 
 my_dataframe = session.table('"SMOOTHIES"."PUBLIC"."FRUIT_OPTIONS"').select(col('FRUIT_NAME'),col('SEARCH_ON'))
 
+# 選択肢の確認（アプリが正常に動作し始めたらコメントアウトを推奨）
+st.dataframe(data=my_dataframe, use_container_width=True)
+st.stop() 
+
 pd_df=my_dataframe.to_pandas()
 
 ingredients_list = st.multiselect(
